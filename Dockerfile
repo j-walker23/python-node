@@ -7,11 +7,8 @@ ENV HOME /root
 # Use baseimage-docker's init process.
 CMD ["/sbin/my_init"]
 
-#   Build system and git.
-RUN /pd_build/utilities.sh
-RUN /pd_build/python.sh
-RUN /pd_build/nodejs.sh
-
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - &&\
+    sudo apt-get install -y python-setuptools python-dev python2.7 nodejs
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
